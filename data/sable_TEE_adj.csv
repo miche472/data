@@ -1,0 +1,129 @@
+ID,SABLE,lights,tee,GROUP,DRUG,Lean
+3706,BW loss,off,4.637927534166669,ad lib,vehicle,25.26
+3706,BW loss,on,3.2050155199083323,ad lib,vehicle,25.26
+3706,BW maintenance,off,5.634732928333332,ad lib,vehicle,25.2
+3706,BW maintenance,on,6.037851229166667,ad lib,vehicle,25.2
+3706,baseline,off,4.418484037499997,ad lib,vehicle,23.56
+3706,baseline,on,5.192102921666668,ad lib,vehicle,23.56
+3706,peak obesity,off,5.217965835000003,ad lib,vehicle,24.6
+3706,peak obesity,on,6.751788654999996,ad lib,vehicle,24.6
+3707,BW loss,off,4.894526777499999,ad lib,vehicle,29.16
+3707,BW loss,on,3.904033871666666,ad lib,vehicle,29.16
+3707,BW maintenance,off,6.018341989166669,ad lib,vehicle,28.48
+3707,BW maintenance,on,7.870858470833333,ad lib,vehicle,28.48
+3707,baseline,off,4.858827811666664,ad lib,vehicle,24.12
+3707,baseline,on,5.691391562499998,ad lib,vehicle,24.12
+3707,peak obesity,off,4.9979118183333355,ad lib,vehicle,27.81
+3707,peak obesity,on,6.893198560833339,ad lib,vehicle,27.81
+3708,BW loss,off,3.710208364999997,restricted,RTIOXA_47,25.9
+3708,BW loss,on,5.030997196666665,restricted,RTIOXA_47,25.9
+3708,BW maintenance,off,3.628361788333332,restricted,RTIOXA_47,25.01
+3708,BW maintenance,on,4.5730477875,restricted,RTIOXA_47,25.01
+3708,baseline,off,4.956558539166668,restricted,RTIOXA_47,25.19
+3708,baseline,on,6.108093367499995,restricted,RTIOXA_47,25.19
+3708,peak obesity,off,5.438603257500004,restricted,RTIOXA_47,27.21
+3708,peak obesity,on,5.592463008333338,restricted,RTIOXA_47,27.21
+3710,BW loss,off,3.3478741949166686,restricted,RTIOXA_47,24.82
+3710,BW loss,on,5.287037649166664,restricted,RTIOXA_47,24.82
+3710,BW maintenance,off,4.434000464166664,restricted,RTIOXA_47,24.46
+3710,BW maintenance,on,5.492418776666668,restricted,RTIOXA_47,24.46
+3710,baseline,off,4.878275865833335,restricted,RTIOXA_47,23.77
+3710,baseline,on,5.913058763333333,restricted,RTIOXA_47,23.77
+3710,peak obesity,off,5.1417558866666635,restricted,RTIOXA_47,28.36
+3710,peak obesity,on,6.326249568333338,restricted,RTIOXA_47,28.36
+3711,BW loss,off,2.9654573641666655,ad lib,vehicle,27.43
+3711,BW loss,on,2.4590797841666676,ad lib,vehicle,27.43
+3711,BW maintenance,off,5.66699529916667,ad lib,vehicle,26.74
+3711,BW maintenance,on,6.696702391666667,ad lib,vehicle,26.74
+3711,baseline,off,4.806510924166667,ad lib,vehicle,24.74
+3711,baseline,on,5.521514055000003,ad lib,vehicle,24.74
+3711,peak obesity,off,5.030389803333335,ad lib,vehicle,25.82
+3711,peak obesity,on,6.46669232833333,ad lib,vehicle,25.82
+3713,BW loss,off,4.200594049999998,ad lib,vehicle,28.91
+3713,BW loss,on,3.3410605495833305,ad lib,vehicle,28.91
+3713,BW maintenance,off,4.083056395000002,ad lib,vehicle,27.39
+3713,BW maintenance,on,4.641433655833334,ad lib,vehicle,27.39
+3713,baseline,off,4.548615444166665,ad lib,vehicle,27.39
+3713,baseline,on,5.474204133333335,ad lib,vehicle,27.39
+3713,peak obesity,off,5.237960458333329,ad lib,vehicle,26.96
+3713,peak obesity,on,7.063586523333337,ad lib,vehicle,26.96
+3714,BW loss,off,2.607203948333331,restricted,vehicle,27.07
+3714,BW loss,on,3.792579559916667,restricted,vehicle,27.07
+3714,BW maintenance,off,3.8663001158333303,restricted,vehicle,24.46
+3714,BW maintenance,on,3.810681268333333,restricted,vehicle,24.46
+3714,baseline,off,4.672677631666667,restricted,vehicle,25.5
+3714,baseline,on,5.678519101666662,restricted,vehicle,25.5
+3714,peak obesity,off,4.9450306975,restricted,vehicle,28.09
+3714,peak obesity,on,5.656434194166666,restricted,vehicle,28.09
+3716,BW loss,off,4.325498732500003,ad lib,RTIOXA_47,26.14
+3716,BW loss,on,5.074540915833339,ad lib,RTIOXA_47,26.14
+3716,BW maintenance,off,6.121967499999993,ad lib,RTIOXA_47,25.81
+3716,BW maintenance,on,4.920336698333335,ad lib,RTIOXA_47,25.81
+3716,baseline,off,4.227148787500001,ad lib,RTIOXA_47,21.72
+3716,baseline,on,4.963577339166664,ad lib,RTIOXA_47,21.72
+3716,peak obesity,off,4.165256973333333,ad lib,RTIOXA_47,25.53
+3716,peak obesity,on,5.935342759166666,ad lib,RTIOXA_47,25.53
+3719,BW loss,off,5.061860235833331,ad lib,RTIOXA_47,25.66
+3719,BW loss,on,6.192002908333337,ad lib,RTIOXA_47,25.66
+3719,BW maintenance,off,5.781293419166662,ad lib,RTIOXA_47,25.45
+3719,BW maintenance,on,4.5540714216666665,ad lib,RTIOXA_47,25.45
+3719,baseline,off,3.792172678333336,ad lib,RTIOXA_47,22.21
+3719,baseline,on,4.900420934166663,ad lib,RTIOXA_47,22.21
+3719,peak obesity,off,4.540167270833335,ad lib,RTIOXA_47,25.89
+3719,peak obesity,on,5.072253429999998,ad lib,RTIOXA_47,25.89
+3720,BW loss,off,3.0173168149999974,restricted,vehicle,23.35
+3720,BW loss,on,2.640847227083333,restricted,vehicle,23.35
+3720,BW maintenance,off,3.107134507500002,restricted,vehicle,22.31
+3720,BW maintenance,on,3.1260308758333357,restricted,vehicle,22.31
+3720,baseline,off,4.611823545833335,restricted,vehicle,22.81
+3720,baseline,on,5.282074875833342,restricted,vehicle,22.81
+3720,peak obesity,off,4.293569574999999,restricted,vehicle,24.91
+3720,peak obesity,on,4.418930238333337,restricted,vehicle,24.91
+3721,BW loss,off,2.6590967616666648,restricted,RTIOXA_47,25.32
+3721,BW loss,on,2.527907861833335,restricted,RTIOXA_47,25.32
+3721,BW maintenance,off,2.6916233516666668,restricted,RTIOXA_47,23.72
+3721,BW maintenance,on,2.5223014883333352,restricted,RTIOXA_47,23.72
+3721,baseline,off,5.149491421666672,restricted,RTIOXA_47,25.51
+3721,baseline,on,6.1142586175,restricted,RTIOXA_47,25.51
+3721,peak obesity,off,5.084392990833336,restricted,RTIOXA_47,27.44
+3721,peak obesity,on,5.699239118333335,restricted,RTIOXA_47,27.44
+3722,BW loss,off,2.904153834166669,restricted,RTIOXA_47,24.27
+3722,BW loss,on,2.8009759646666708,restricted,RTIOXA_47,24.27
+3722,BW maintenance,off,3.4584823872500015,restricted,RTIOXA_47,25.05
+3722,BW maintenance,on,5.746489001583335,restricted,RTIOXA_47,25.05
+3722,baseline,off,4.735357834166667,restricted,RTIOXA_47,25.64
+3722,baseline,on,5.8606836675,restricted,RTIOXA_47,25.64
+3722,peak obesity,off,4.857506140000003,restricted,RTIOXA_47,26.43
+3722,peak obesity,on,4.9345622291666675,restricted,RTIOXA_47,26.43
+3726,BW loss,off,5.547460233333332,ad lib,RTIOXA_47,26.9
+3726,BW loss,on,6.459979822499999,ad lib,RTIOXA_47,26.9
+3726,BW maintenance,off,7.8089054024999935,ad lib,RTIOXA_47,25.84
+3726,BW maintenance,on,8.852922346666661,ad lib,RTIOXA_47,25.84
+3726,baseline,off,4.336110224166665,ad lib,RTIOXA_47,23.03
+3726,baseline,on,5.513293538333328,ad lib,RTIOXA_47,23.03
+3726,peak obesity,off,4.285534705000001,ad lib,RTIOXA_47,26.36
+3726,peak obesity,on,4.758620968333335,ad lib,RTIOXA_47,26.36
+3727,BW loss,off,2.9754042108333323,restricted,vehicle,25.56
+3727,BW loss,on,3.0861836141666656,restricted,vehicle,25.56
+3727,BW maintenance,off,4.335798073333335,restricted,vehicle,23.31
+3727,BW maintenance,on,5.650670988333339,restricted,vehicle,23.31
+3727,baseline,off,5.428463426666665,restricted,vehicle,25.38
+3727,baseline,on,6.561634182500002,restricted,vehicle,25.38
+3727,peak obesity,off,4.640848475833332,restricted,vehicle,26.08
+3727,peak obesity,on,6.164117101666664,restricted,vehicle,26.08
+3728,BW loss,off,3.8440009699999993,restricted,vehicle,24.29
+3728,BW loss,on,3.7296753608333333,restricted,vehicle,24.29
+3728,BW maintenance,off,3.388544908333333,restricted,vehicle,22.87
+3728,BW maintenance,on,4.310927053333332,restricted,vehicle,22.87
+3728,baseline,off,5.2671168,restricted,vehicle,24.04
+3728,baseline,on,6.3586555324999985,restricted,vehicle,24.04
+3728,peak obesity,off,5.026230145833335,restricted,vehicle,26.05
+3728,peak obesity,on,4.947037638333333,restricted,vehicle,26.05
+3729,BW loss,off,2.417350649166666,restricted,RTIOXA_47,26.03
+3729,BW loss,on,2.599439143333334,restricted,RTIOXA_47,26.03
+3729,BW maintenance,off,4.081614200000001,restricted,RTIOXA_47,25.63
+3729,BW maintenance,on,4.236208504166667,restricted,RTIOXA_47,25.63
+3729,baseline,off,4.970599166666667,restricted,RTIOXA_47,25
+3729,baseline,on,6.009830746666671,restricted,RTIOXA_47,25
+3729,peak obesity,off,5.046248436666668,restricted,RTIOXA_47,27.67
+3729,peak obesity,on,5.089397597500003,restricted,RTIOXA_47,27.67

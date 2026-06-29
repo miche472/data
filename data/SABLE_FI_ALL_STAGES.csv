@@ -1,0 +1,159 @@
+﻿ID,SABLE,STRAIN,SEX,DIET_FORMULA,Day_totalFI,GROUP,DRUG,COHORT
+3706,baseline,NZO/HlLtJ,F,D12450Ki,5.289615491,ad lib,vehicle,3
+3706,BW regain,NZO/HlLtJ,F,D12450Ki,5.303567282,ad lib,vehicle,3
+3706,peak obesity,NZO/HlLtJ,F,D12450Ki,5.534675974,ad lib,vehicle,3
+3706,BW loss,NZO/HlLtJ,F,D12450Ki,5.602416292,ad lib,vehicle,3
+3706,BW maintenance,NZO/HlLtJ,F,D12450Ki,7.765886854,ad lib,vehicle,3
+3707,baseline,NZO/HlLtJ,F,D12450Ki,4.526335191,ad lib,vehicle,3
+3707,peak obesity,NZO/HlLtJ,F,D12450Ki,5.508271119,ad lib,vehicle,3
+3707,BW loss,NZO/HlLtJ,F,D12450Ki,6.795094292,ad lib,vehicle,3
+3707,BW regain,NZO/HlLtJ,F,D12450Ki,8.907078164,ad lib,vehicle,3
+3707,BW maintenance,NZO/HlLtJ,F,D12450Ki,9.132205435,ad lib,vehicle,3
+3708,peak obesity,NZO/HlLtJ,F,D12450Ki,3.04924168,restricted,RTIOXA_47,3
+3708,BW loss,NZO/HlLtJ,F,D12450Ki,3.345,restricted,RTIOXA_47,3
+3708,BW maintenance,NZO/HlLtJ,F,D12450Ki,3.845,restricted,RTIOXA_47,3
+3708,baseline,NZO/HlLtJ,F,D12450Ki,5.894133814,restricted,RTIOXA_47,3
+3708,BW regain,NZO/HlLtJ,F,D12450Ki,7.984101091,restricted,RTIOXA_47,3
+3709,BW loss,NZO/HlLtJ,F,D12450Ki,2.952208562,ad lib,vehicle,3
+3709,baseline,NZO/HlLtJ,F,D12450Ki,4.829325443,ad lib,vehicle,3
+3709,BW regain,NZO/HlLtJ,F,D12450Ki,5.394188602,ad lib,vehicle,3
+3709,peak obesity,NZO/HlLtJ,F,D12450Ki,7.264541286,ad lib,vehicle,3
+3709,BW maintenance,NZO/HlLtJ,F,D12450Ki,7.688801718,ad lib,vehicle,3
+3710,BW loss,NZO/HlLtJ,F,D12450Ki,2.815,restricted,RTIOXA_47,3
+3710,BW maintenance,NZO/HlLtJ,F,D12450Ki,3.29,restricted,RTIOXA_47,3
+3710,peak obesity,NZO/HlLtJ,F,D12450Ki,4.79946796,restricted,RTIOXA_47,3
+3710,BW regain,NZO/HlLtJ,F,D12450Ki,5.13156612,restricted,RTIOXA_47,3
+3710,baseline,NZO/HlLtJ,F,D12450Ki,6.224406912,restricted,RTIOXA_47,3
+3711,BW loss,NZO/HlLtJ,F,D12450Ki,3.253880987,ad lib,vehicle,3
+3711,peak obesity,NZO/HlLtJ,F,D12450Ki,3.508130221,ad lib,vehicle,3
+3711,baseline,NZO/HlLtJ,F,D12450Ki,4.878753887,ad lib,vehicle,3
+3711,BW regain,NZO/HlLtJ,F,D12450Ki,5.379500304,ad lib,vehicle,3
+3711,BW maintenance,NZO/HlLtJ,F,D12450Ki,8.45591473,ad lib,vehicle,3
+3713,BW regain,NZO/HlLtJ,F,D12450Ki,3.613573477,ad lib,vehicle,3
+3713,peak obesity,NZO/HlLtJ,F,D12450Ki,5.938239556,ad lib,vehicle,3
+3713,BW loss,NZO/HlLtJ,F,D12450Ki,6.596898641,ad lib,vehicle,3
+3713,BW maintenance,NZO/HlLtJ,F,D12450Ki,10.35528648,ad lib,vehicle,3
+3713,baseline,NZO/HlLtJ,F,D12450Ki,23.28886776,ad lib,vehicle,3
+3714,BW loss,NZO/HlLtJ,F,D12450Ki,2.73,restricted,vehicle,3
+3714,BW maintenance,NZO/HlLtJ,F,D12450Ki,3.935,restricted,vehicle,3
+3714,baseline,NZO/HlLtJ,F,D12450Ki,4.613624731,restricted,vehicle,3
+3714,peak obesity,NZO/HlLtJ,F,D12450Ki,5.569407546,restricted,vehicle,3
+3714,BW regain,NZO/HlLtJ,F,D12450Ki,5.838252995,restricted,vehicle,3
+3716,BW regain,NZO/HlLtJ,F,D12450Ki,4.530843058,ad lib,RTIOXA_47,4
+3716,baseline,NZO/HlLtJ,F,D12450Ki,4.718971956,ad lib,RTIOXA_47,4
+3716,BW loss,NZO/HlLtJ,F,D12450Ki,4.906306288,ad lib,RTIOXA_47,4
+3716,peak obesity,NZO/HlLtJ,F,D12450Ki,4.946611349,ad lib,RTIOXA_47,4
+3716,BW maintenance,NZO/HlLtJ,F,D12450Ki,8.575904629,ad lib,RTIOXA_47,4
+3717,BW loss,NZO/HlLtJ,F,D12450Ki,2.701181194,ad lib,RTIOXA_47,4
+3717,peak obesity,NZO/HlLtJ,F,D12450Ki,3.026076583,ad lib,RTIOXA_47,4
+3717,BW regain,NZO/HlLtJ,F,D12450Ki,4.066479109,ad lib,RTIOXA_47,4
+3717,baseline,NZO/HlLtJ,F,D12450Ki,6.56329355,ad lib,RTIOXA_47,4
+3717,BW maintenance,NZO/HlLtJ,F,D12450Ki,13.89789324,ad lib,RTIOXA_47,4
+3718,BW regain,NZO/HlLtJ,F,D12450Ki,4.313913941,ad lib,RTIOXA_47,4
+3718,peak obesity,NZO/HlLtJ,F,D12450Ki,4.918621002,ad lib,RTIOXA_47,4
+3718,baseline,NZO/HlLtJ,F,D12450Ki,4.997877663,ad lib,RTIOXA_47,4
+3718,BW loss,NZO/HlLtJ,F,D12450Ki,5.899071973,ad lib,RTIOXA_47,4
+3718,BW maintenance,NZO/HlLtJ,F,D12450Ki,11.86590707,ad lib,RTIOXA_47,4
+3719,BW loss,NZO/HlLtJ,F,D12450Ki,3.443464726,ad lib,RTIOXA_47,4
+3719,BW regain,NZO/HlLtJ,F,D12450Ki,4.117683489,ad lib,RTIOXA_47,4
+3719,peak obesity,NZO/HlLtJ,F,D12450Ki,4.128322764,ad lib,RTIOXA_47,4
+3719,baseline,NZO/HlLtJ,F,D12450Ki,5.360468314,ad lib,RTIOXA_47,4
+3719,BW maintenance,NZO/HlLtJ,F,D12450Ki,13.4111798,ad lib,RTIOXA_47,4
+3720,BW loss,NZO/HlLtJ,F,D12450Ki,2.23,restricted,vehicle,4
+3720,BW maintenance,NZO/HlLtJ,F,D12450Ki,2.785,restricted,vehicle,4
+3720,baseline,NZO/HlLtJ,F,D12450Ki,4.280408967,restricted,vehicle,4
+3720,peak obesity,NZO/HlLtJ,F,D12450Ki,6.512159703,restricted,vehicle,4
+3720,BW regain,NZO/HlLtJ,F,D12450Ki,14.03451185,restricted,vehicle,4
+3721,BW loss,NZO/HlLtJ,F,D12450Ki,2.245,restricted,RTIOXA_47,4
+3721,BW maintenance,NZO/HlLtJ,F,D12450Ki,3.12,restricted,RTIOXA_47,4
+3721,peak obesity,NZO/HlLtJ,F,D12450Ki,3.842337886,restricted,RTIOXA_47,4
+3721,baseline,NZO/HlLtJ,F,D12450Ki,4.108506853,restricted,RTIOXA_47,4
+3721,BW regain,NZO/HlLtJ,F,D12450Ki,5.747863199,restricted,RTIOXA_47,4
+3722,BW loss,NZO/HlLtJ,F,D12450Ki,2.255,restricted,RTIOXA_47,4
+3722,BW maintenance,NZO/HlLtJ,F,D12450Ki,2.815,restricted,RTIOXA_47,4
+3722,peak obesity,NZO/HlLtJ,F,D12450Ki,3.405373159,restricted,RTIOXA_47,4
+3722,baseline,NZO/HlLtJ,F,D12450Ki,4.580205067,restricted,RTIOXA_47,4
+3722,BW regain,NZO/HlLtJ,F,D12450Ki,9.453200382,restricted,RTIOXA_47,4
+3723,BW maintenance,NZO/HlLtJ,F,D12450Ki,2.635,restricted,RTIOXA_47,4
+3723,BW loss,NZO/HlLtJ,F,D12450Ki,3.19,restricted,RTIOXA_47,4
+3723,peak obesity,NZO/HlLtJ,F,D12450Ki,3.341197751,restricted,RTIOXA_47,4
+3723,baseline,NZO/HlLtJ,F,D12450Ki,3.513239312,restricted,RTIOXA_47,4
+3723,BW regain,NZO/HlLtJ,F,D12450Ki,3.643475909,restricted,RTIOXA_47,4
+3724,BW loss,NZO/HlLtJ,F,D12450Ki,2.645,restricted,vehicle,4
+3724,BW maintenance,NZO/HlLtJ,F,D12450Ki,2.695,restricted,vehicle,4
+3724,peak obesity,NZO/HlLtJ,F,D12450Ki,3.629458831,restricted,vehicle,4
+3724,baseline,NZO/HlLtJ,F,D12450Ki,4.037299176,restricted,vehicle,4
+3724,BW regain,NZO/HlLtJ,F,D12450Ki,4.117208719,restricted,vehicle,4
+3725,BW maintenance,NZO/HlLtJ,F,D12450Ki,2.72,restricted,vehicle,4
+3725,BW loss,NZO/HlLtJ,F,D12450Ki,2.79,restricted,vehicle,4
+3725,BW regain,NZO/HlLtJ,F,D12450Ki,3.283063891,restricted,vehicle,4
+3725,peak obesity,NZO/HlLtJ,F,D12450Ki,4.524520113,restricted,vehicle,4
+3725,baseline,NZO/HlLtJ,F,D12450Ki,4.528924392,restricted,vehicle,4
+3726,peak obesity,NZO/HlLtJ,F,D12450Ki,4.084293054,ad lib,RTIOXA_47,5
+3726,baseline,NZO/HlLtJ,F,D12450Ki,4.761793998,ad lib,RTIOXA_47,5
+3726,BW regain,NZO/HlLtJ,F,D12450Ki,4.892640287,ad lib,RTIOXA_47,5
+3726,BW loss,NZO/HlLtJ,F,D12450Ki,7.380463794,ad lib,RTIOXA_47,5
+3726,BW maintenance,NZO/HlLtJ,F,D12450Ki,9.898472365,ad lib,RTIOXA_47,5
+3727,BW loss,NZO/HlLtJ,F,D12450Ki,2.215,restricted,vehicle,5
+3727,BW maintenance,NZO/HlLtJ,F,D12450Ki,2.655,restricted,vehicle,5
+3727,peak obesity,NZO/HlLtJ,F,D12450Ki,2.8851342,restricted,vehicle,5
+3727,BW regain,NZO/HlLtJ,F,D12450Ki,3.846674417,restricted,vehicle,5
+3727,baseline,NZO/HlLtJ,F,D12450Ki,5.304802524,restricted,vehicle,5
+3728,peak obesity,NZO/HlLtJ,F,D12450Ki,2.498293926,restricted,vehicle,5
+3728,BW maintenance,NZO/HlLtJ,F,D12450Ki,2.82,restricted,vehicle,5
+3728,BW loss,NZO/HlLtJ,F,D12450Ki,3.235,restricted,vehicle,5
+3728,BW regain,NZO/HlLtJ,F,D12450Ki,4.066488072,restricted,vehicle,5
+3728,baseline,NZO/HlLtJ,F,D12450Ki,5.158041636,restricted,vehicle,5
+3729,BW maintenance,NZO/HlLtJ,F,D12450Ki,3.405,restricted,RTIOXA_47,5
+3729,BW loss,NZO/HlLtJ,F,D12450Ki,3.41,restricted,RTIOXA_47,5
+3729,peak obesity,NZO/HlLtJ,F,D12450Ki,3.665090001,restricted,RTIOXA_47,5
+3729,BW regain,NZO/HlLtJ,F,D12450Ki,4.786950389,restricted,RTIOXA_47,5
+3729,baseline,NZO/HlLtJ,F,D12450Ki,5.934273257,restricted,RTIOXA_47,5
+7872,BW maintenance,C57BL6/J,F,D12451i,1.71,restricted,vehicle,2
+7872,peak obesity,C57BL6/J,F,D12451i,2.244725593,restricted,vehicle,2
+7872,BW loss,C57BL6/J,F,D12451i,2.32,restricted,vehicle,2
+7872,BW regain,C57BL6/J,F,D12451i,2.48058031,restricted,vehicle,2
+7873,BW regain,C57BL6/J,F,D12451i,2.995423867,ad lib,RTIOXA_47,2
+7873,peak obesity,C57BL6/J,F,D12451i,3.567587182,ad lib,RTIOXA_47,2
+7873,BW maintenance,C57BL6/J,F,D12451i,5.930553788,ad lib,RTIOXA_47,2
+7873,BW loss,C57BL6/J,F,D12451i,8.416756907,ad lib,RTIOXA_47,2
+7874,BW loss,C57BL6/J,F,D12451i,1.99,restricted,RTIOXA_47,2
+7874,BW maintenance,C57BL6/J,F,D12451i,2,restricted,RTIOXA_47,2
+7874,BW regain,C57BL6/J,F,D12451i,2.606758047,restricted,RTIOXA_47,2
+7874,peak obesity,C57BL6/J,F,D12451i,3.366161067,restricted,RTIOXA_47,2
+7875,BW regain,C57BL6/J,F,D12451i,3.312566825,ad lib,vehicle,2
+7875,peak obesity,C57BL6/J,F,D12451i,3.429481403,ad lib,vehicle,2
+7875,BW maintenance,C57BL6/J,F,D12451i,4.618938173,ad lib,vehicle,2
+7875,BW loss,C57BL6/J,F,D12451i,4.987171731,ad lib,vehicle,2
+7876,BW regain,C57BL6/J,F,D12451i,2.023877551,ad lib,vehicle,2
+7876,peak obesity,C57BL6/J,F,D12451i,2.687632932,ad lib,vehicle,2
+7876,BW maintenance,C57BL6/J,F,D12451i,5.240465871,ad lib,vehicle,2
+7876,BW loss,C57BL6/J,F,D12451i,6.050823259,ad lib,vehicle,2
+7877,BW maintenance,C57BL6/J,F,D12451i,2.495,restricted,RTIOXA_47,2
+7877,BW loss,C57BL6/J,F,D12451i,2.525,restricted,RTIOXA_47,2
+7877,peak obesity,C57BL6/J,F,D12451i,2.74343027,restricted,RTIOXA_47,2
+7877,BW regain,C57BL6/J,F,D12451i,14.92921344,restricted,RTIOXA_47,2
+7878,BW maintenance,C57BL6/J,F,D12451i,1.975,restricted,vehicle,2
+7878,BW loss,C57BL6/J,F,D12451i,2.245,restricted,vehicle,2
+7878,peak obesity,C57BL6/J,F,D12451i,2.972665301,restricted,vehicle,2
+7878,BW regain,C57BL6/J,F,D12451i,100.436392,restricted,vehicle,2
+7879,BW maintenance,C57BL6/J,F,D12451i,1.984536678,ad lib,RTIOXA_47,2
+7879,peak obesity,C57BL6/J,F,D12451i,2.796493268,ad lib,RTIOXA_47,2
+7879,BW loss,C57BL6/J,F,D12451i,6.005554568,ad lib,RTIOXA_47,2
+7879,BW regain,C57BL6/J,F,D12451i,12.26458331,ad lib,RTIOXA_47,2
+7880,peak obesity,C57BL6/J,F,D12450Ki,3.052003954,ad lib,vehicle,2
+7880,BW maintenance,C57BL6/J,F,D12450Ki,3.41091808,ad lib,vehicle,2
+7880,BW loss,C57BL6/J,F,D12450Ki,4.177842702,ad lib,vehicle,2
+7880,BW regain,C57BL6/J,F,D12450Ki,4.209739337,ad lib,vehicle,2
+7881,BW loss,C57BL6/J,F,D12450Ki,2.57079292,ad lib,vehicle,2
+7881,peak obesity,C57BL6/J,F,D12450Ki,4.078537996,ad lib,vehicle,2
+7881,BW regain,C57BL6/J,F,D12450Ki,4.233536596,ad lib,vehicle,2
+7881,BW maintenance,C57BL6/J,F,D12450Ki,5.525511254,ad lib,vehicle,2
+7882,BW loss,C57BL6/J,F,D12450Ki,2.655551348,ad lib,vehicle,2
+7882,peak obesity,C57BL6/J,F,D12450Ki,3.247432451,ad lib,vehicle,2
+7882,BW regain,C57BL6/J,F,D12450Ki,3.834957639,ad lib,vehicle,2
+7882,BW maintenance,C57BL6/J,F,D12450Ki,3.916270406,ad lib,vehicle,2
+7883,BW loss,C57BL6/J,F,D12450Ki,2.94738054,ad lib,vehicle,2
+7883,peak obesity,C57BL6/J,F,D12450Ki,3.332310027,ad lib,vehicle,2
+7883,BW regain,C57BL6/J,F,D12450Ki,3.659550916,ad lib,vehicle,2
+7883,BW maintenance,C57BL6/J,F,D12450Ki,7.55279494,ad lib,vehicle,2

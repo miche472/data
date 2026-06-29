@@ -5,3 +5,4 @@
 # ignore all the sable csv files and rds files eventually
 *m.csv
 *.rds
+.DS_Store
