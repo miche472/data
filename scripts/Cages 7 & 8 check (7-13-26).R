@@ -32,8 +32,7 @@ filter_loc1_test<-sable_dwn %>%
   filter(COHORT ==19) %>%
   filter(ID %in% c(3733, 3741)) %>%
   mutate(Time = as_hms(format(DateTime, "%H:%M:%S")),
-    lights = if_else(Time >= as_hms("06:30:00") & Time < as_hms("18:30:00"),"on", "off"),
-    
+    lights = if_else(Time >= as_hms("06:30:00") & Time < as_hms("18:30:00"),"on", "off")) %>%
   filter(grepl("AllMeters_*", parameter)) %>%
   ungroup() %>% 
   arrange(ID, DateTime) %>%
@@ -57,7 +56,7 @@ filter_TEE1_test <-sable_dwn %>%
   filter(COHORT ==19) %>%
   filter(ID %in% c(3733, 3741)) %>%
   mutate(Time = as_hms(format(DateTime, "%H:%M:%S")),
-    lights = if_else(Time >= as_hms("06:30:00") & Time < as_hms("18:30:00"),"on", "off"),
+    lights = if_else(Time >= as_hms("06:30:00") & Time < as_hms("18:30:00"),"on", "off")) %>%
   filter(grepl("kcal_hr_*", parameter)) %>%
   ungroup() %>% 
   arrange(ID, DateTime) %>%
@@ -66,7 +65,7 @@ filter_TEE1_test <-sable_dwn %>%
     is_zt_init = replace_na(as.numeric(zt_time == 0 & lag(zt_time, default = -1) != 0), 0),
     complete_days = cumsum(is_zt_init)) %>%
   filter(complete_days > 0) %>%
-  group_by(ID, omplete_days) %>%
+  group_by(ID, complete_days) %>%
   mutate(recording_duration = as.numeric(difftime(max(DateTime),
                                              min(DateTime),
                                              units="hours")),
@@ -109,14 +108,14 @@ filter_loc_TEE3_test <- filter_loc_TEE2_test %>%
   filter(complete_days ==1)
 
 # RMR calculated using percentile Percentile for RMR --> 
-Minute_sum_EE_hr_exp2b <- filter_loc_TEE3_exp2b %>%
+Minute_sum_EE_hr_test <- filter_loc_TEE3_test %>%
   ungroup() %>%
   arrange(DateTime) %>%
   # Movement each hr (during how many minutes did mouse move)
-  group_by(SABLE, ID) %>%
+  group_by(ID) %>%
   mutate(move = if_else(All_meters > lag(All_meters), 1, 0, missing = 0)) %>%
   ungroup() %>%
-  group_by(SABLE, ID, hr) %>%
+  group_by(ID, hr) %>%
   summarise(
     n_obs = n(),
     minutes_active = sum(move == 1, na.rm = TRUE),
@@ -133,18 +132,13 @@ Minute_sum_EE_hr_exp2b <- filter_loc_TEE3_exp2b %>%
     NEAT_kcal = sum(((Kcal_Hr - RMR_rate) / 60)[move == 1], na.rm = TRUE), .groups = "drop") %>%
   
   # Verify that TEE = RMR + NEAT --> TEEvsRMR_NEAT should be close to zero
-  mutate(TEEvsRMR_NEAT = TEE_kcal - (RMR_kcal + NEAT_kcal)) %>%
-  #Indicate when mice received vehicle and when they received 
-  mutate(Treatment_stage = case_when(
-    SABLE=="Peak obesity"~ "No injections",
-    SABLE== "BW loss_ctrl" ~ "Vehicle",
-    SABLE=="BW loss_TZP" ~ "Tirzepatide")) %>%
-  mutate(SABLE = factor(SABLE, levels = c("Peak obesity","BW loss_ctrl", "BW loss_TZP")))
+  mutate(TEEvsRMR_NEAT = TEE_kcal - (RMR_kcal + NEAT_kcal)) 
+  
 
 #Calculate daily sum (add all hours together)
-Daily_EE_exp2b <- Minute_sum_EE_hr_exp2b %>%
+Daily_EE_test <- Minute_sum_EE_hr_test %>%
   ungroup() %>%
-  group_by(ID, SABLE) %>%
+  group_by(ID) %>%
   summarise(TEE_kcal_day = sum(TEE_kcal),
             NEAT_kcal_day = sum(NEAT_kcal),
             RMR_kcal_day = sum(RMR_kcal),
