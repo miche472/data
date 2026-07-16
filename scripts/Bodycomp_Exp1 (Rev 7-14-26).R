@@ -140,7 +140,13 @@ plot_echo_delta <-echmoMRI_Exp1_delta %>%
   filter_out(n_measurement=="Day 0") %>%
   ungroup() %>%
   group_by(DRUG, n_measurement) %>%
-  summarise(Avg_delta_Lean_G = mean(delta_lean),
+  summarise(Avg_Fat_G =mean(Fat),
+            SD_Fat_G =sd(Fat),
+            Avg_Lean_G=mean(Lean),
+            SD_Lean_G=sd(Lean),
+            Avg_BW_G=mean(FatplusLean),
+            SD_BW_G=sd(FatplusLean),
+    Avg_delta_Lean_G = mean(delta_lean),
             SD_delta_Lean_G = sd(delta_lean),
             Avg_delta_Fat_G = mean(delta_fat),
             SD_delta_Fat_G = sd(delta_fat),
@@ -156,6 +162,19 @@ plot_echo_delta <-echmoMRI_Exp1_delta %>%
          Avg_delta_FatplusLean, SD_delta_FatplusLean, 
          Avg_Lean_FatplusLean, SD_Lean_FatplusLean, Avg_Lean_pct_change, SD_Lean_pct_change, 
          Avg_Lean_pct_BW, SD_Lean_pct_BW)
+
+#Summary of mass, lean, and fat in grams
+summary_grams <-echmoMRI_Exp1_delta %>%
+  filter_out(n_measurement=="Day 0") %>%
+  ungroup() %>%
+  group_by(DRUG, n_measurement) %>%
+  summarise(Avg_Fat_G =mean(Fat),
+            SD_Fat_G =sd(Fat),
+            Avg_Lean_G=mean(Lean),
+            SD_Lean_G=sd(Lean),
+            #SE_Lean_G=(SD_Lean_G)/n(ID),
+            Avg_BW_G=mean(FatplusLean),
+            SD_BW_G=sd(FatplusLean))
 
 #---
 #---
@@ -278,7 +297,7 @@ ggsave(Fat_plot_G,
        dpi = 300,
        path = "/Users/laurenmichels/Desktop/figures")
 
-## LMM: ΔFat mass (%) from initial fat mass ####
+## LMM: Fat mass(g) ####
 #Build multiple linear regression model for Fat_pct_change #
 model_Fat_G <- lmer(Fat ~ n_measurement*DRUG + (1 | ID), data=echmoMRI_Exp1_delta)
 summary(model_Fat_G)
@@ -299,7 +318,7 @@ contrasts_by_n_measurement_Fat_G_df <- as.data.frame(contrasts_by_n_measurement_
 #---
 # Adiposity index ####
 ##Graph AI ####
-AI_plot <-ggplot(echoMRI_data_BWloss, aes(x=n_measurement, y=adiposity_index, 
+AI_plot_Exp1 <-ggplot(echoMRI_data_BWloss, aes(x=n_measurement, y=adiposity_index, 
                                           group=DRUG, fill=DRUG, color=DRUG)) +
   geom_point(stat = "summary", 
              fun = "mean", aes(color=DRUG), size=4) +
@@ -308,16 +327,39 @@ AI_plot <-ggplot(echoMRI_data_BWloss, aes(x=n_measurement, y=adiposity_index,
   geom_errorbar(stat = "summary", 
                 fun.data = mean_se, aes(width=0.08), width=0.1) +
   geom_jitter(width = 0.08, alpha = 0.6) +
-  #geom_point(shape=1) +
   scale_color_manual(values = custom_colors_GLP) +
-  #geom_point(aes(group=ID)) + geom_line(aes(group=ID, alpha=0.6)) +
   theme_bw(base_size = 14) +
   format.plot_LM +
-  labs(y= "Adiposity index (fat/lean)",
-       title= "Exp 1: Adiposity index",
+  labs(y= "Adiposity index (Fat/Lean)",
+       title= "Adiposity index",
        color="Treatment", fill="Treatment")
-AI_plot
+AI_plot_Exp1
 
+#Export plot to a folder on laptop called "figures" 
+ggsave(AI_plot_Exp1,
+       filename="Exp1_AI_plot.png", 
+       width = 6, 
+       height = 4, 
+       units = "in", 
+       dpi = 300,
+       path = "/Users/laurenmichels/Desktop/figures")
+
+## LMM: Adiposity index (from initial fat mass)fat/lean) ####
+#Build multiple linear regression model for Fat_pct_change #
+model_AI <- lmer(adiposity_index ~ n_measurement*DRUG + (1 | ID), data=echmoMRI_Exp1_delta)
+summary(model_AI)
+
+#Calculate estimated marginal means #
+emm_AI <- emmeans(model_AI, ~ n_measurement*DRUG, cov.reduce = mean)
+emm_AI_df <- as.data.frame(emm_AI)
+
+# Pairwise contrasts within each DRUG (treatment group)
+contrasts_by_DRUG_AI <- contrast(emm_AI, method = "pairwise", by = "DRUG")
+contrasts_by_DRUG_AI_df <- as.data.frame(contrasts_by_DRUG_AI)
+
+# Pairwise contrasts within each n_measurement (time point)
+contrasts_by_n_measurement_AI <- contrast(emm_AI, method = "pairwise", by = "n_measurement")
+contrasts_by_n_measurement_AI_df <- as.data.frame(contrasts_by_n_measurement_AI)
 
 #---
 #---
@@ -339,16 +381,16 @@ BW_pct_change_plot <-ggplot(echmoMRI_Exp1_delta, aes(x=n_measurement, y=BW_pct_c
   theme_bw(base_size = 14) +
   format.plot_LM +
   geom_hline(yintercept=0)+
-  labs(y= "ΔBody weight (%)",
-       title= "Percent change in body weight",
+  labs(y= "Δ Body weight (%)",
+       title= "Δ Body weight (%)",
        color="Treatment", fill="Treatment")
 BW_pct_change_plot
 
 #Export plot to a folder on laptop called "figures" 
 ggsave(BW_pct_change_plot,
        filename="Exp1_BW_plot1.png", 
-       width = 9, 
-       height = 6, 
+       width = 6, 
+       height = 4, 
        units = "in", 
        dpi = 300,
        path = "/Users/laurenmichels/Desktop/figures")
@@ -385,16 +427,16 @@ Lean_pct_change_plot <-ggplot(echmoMRI_Exp1_delta, aes(x=n_measurement, y=Lean_p
   theme_bw(base_size = 14) +
   format.plot_LM +
   geom_hline(yintercept=0)+
-  labs(y= "ΔLean mass (%)",
-       title= "Percent change in lean mass",
+  labs(y= "Δ Lean mass (%)",
+       title= "Δ Lean mass (%)",
        color="Treatment", fill="Treatment")
 Lean_pct_change_plot
 
 #Export plot to a folder on laptop called "figures" 
 ggsave(Lean_pct_change_plot,
        filename="Exp1_lean_plot1.png", 
-       width = 9, 
-       height = 6, 
+       width = 6, 
+       height = 4, 
        units = "in", 
        dpi = 300,
        path = "/Users/laurenmichels/Desktop/figures")
@@ -480,8 +522,8 @@ Lean_pct_of_BW_plot <-ggplot(echmoMRI_Exp1_delta, aes(x=n_measurement, y=Lean_pc
   scale_color_manual(values = custom_colors_GLP) +
   theme_bw(base_size = 14) +
   format.plot_LM +
-  labs(y= "% of Total BW",
-       title= "Percent of BW comprised of lean mass",
+  labs(y= "% Lean mass (Lean/BW)",
+       title= "% Lean mass",
        color="Treatment", fill="Treatment")
 Lean_pct_of_BW_plot
 
@@ -524,8 +566,8 @@ Fat_pct_of_BW_plot <-ggplot(echmoMRI_Exp1_delta, aes(x=n_measurement, y=Fat_pct_
   scale_color_manual(values = custom_colors_GLP) +
   theme_bw(base_size = 14) +
   format.plot_LM +
-  labs(y= "% of Total BW",
-       title= "Percent of BW comprised of fat mass",
+  labs(y= "% Fat mass (Fat/BW)",
+       title= "% Fat mass",
        color="Treatment", fill="Treatment")
 Fat_pct_of_BW_plot
 
