@@ -69,6 +69,8 @@ design_final <- design %>%
     across(starts_with("INJECT"), ~ dose_key[.x]))
 design_final
 
+write_csv(x = design_final, "../data/design_final_7-17.csv")
+
 # Change format to long to allow for later joining with other data frames
 # Convert to long format --> One row per mouse × dose combination
 
@@ -80,3 +82,5 @@ design_long <- design_final %>%
   mutate(PERIOD = readr::parse_number(INJECT_DAY)) %>%
   arrange(ID, INJECT_DAY)
 design_long
+
+write_csv(x = design_final, "../data/design_long_7-17.csv")
