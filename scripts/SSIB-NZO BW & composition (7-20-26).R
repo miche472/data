@@ -1,7 +1,7 @@
-#For APS poster
+#For SSIB poster
 
-#Created:3-27-26
-#Revised:3-27-26
+#Created: based on 4-9-26 script for APS 2026 poster
+#Revised:on 7-20-26 I updated the script for use at SSIB 2026 and renamed the script
 
 #Figure 1: body weight and composition during weight cycling
   #Graphs of body composition and BW at each Sable time point
@@ -57,7 +57,12 @@ echoMRI_data <- read_csv("~/Documents/GitHub/data/data/echomri.csv") %>%
   filter(!(ID == 3711 & Date == as.Date("2025-01-27"))) %>% #repeated
   filter(!(ID == 3727 & Date == as.Date("2025-02-07"))) %>% #repeated
   mutate(STATUS = factor(STATUS,levels = c("Baseline", "Peak obesity", "BW loss", "BW maintenance", "BW regain"))) %>% 
-  rename(SABLE = STATUS) 
+  rename(SABLE = STATUS) %>%
+  ungroup() %>%
+  group_by(ID, SABLE) %>%
+  arrange(Date) %>%
+  mutate(BW = Fat+ Lean,
+         Diff=Weight-BW)
 
 
 # Convert echoMRI_data to long format
@@ -65,7 +70,7 @@ echoMRI_data_long <- echoMRI_data %>%
   group_by(ID, SABLE, Date) %>%
   rename(mass_Fat= Fat,
          mass_Lean=Lean,
-         mass_Total = Weight,
+         mass_Total = BW,
          mass_adiposity_index = adiposity_index) %>%
   select(ID, 
          GROUP, 
@@ -155,7 +160,7 @@ ggsave(plot_echoMRI_Baseline,
        height = 4, 
        units = "in", 
        dpi = 300,
-       path = "/Users/laurenmichels/Desktop/APS_figures")
+       path = "/Users/laurenmichels/Desktop/figures/SSIB_2026")
 
 #---
 ##Graph Peak obesity ####
@@ -206,7 +211,7 @@ ggsave(plot_echoMRI_obesity,
        height = 4, 
        units = "in", 
        dpi = 300,
-       path = "/Users/laurenmichels/Desktop/APS_figures")
+       path = "/Users/laurenmichels/Desktop/figures/SSIB_2026")
 
 #---
 ##Graph BW loss ####
@@ -257,7 +262,7 @@ ggsave(plot_echoMRI_BWloss,
        height = 4, 
        units = "in", 
        dpi = 300,
-       path = "/Users/laurenmichels/Desktop/APS_figures")
+       path = "/Users/laurenmichels/Desktop/figures/SSIB_2026")
 
 #---
 ##Graph BW maintenance ####
@@ -308,7 +313,7 @@ ggsave(plot_echoMRI_BWmaintenance,
        height = 4, 
        units = "in", 
        dpi = 300,
-       path = "/Users/laurenmichels/Desktop/APS_figures")
+       path = "/Users/laurenmichels/Desktop/figures/SSIB_2026")
 
 #---
 ##Graph BW regain ####
@@ -359,7 +364,7 @@ ggsave(plot_echoMRI_BWregain,
       height = 4, 
       units = "in", 
       dpi = 300,
-      path = "/Users/laurenmichels/Desktop/APS_figures")
+      path = "/Users/laurenmichels/Desktop/figures/SSIB_2026")
 
 #-------------------------------------------------------------------#
 #Stats for Fat, Lean, & BW -> T tests ####
