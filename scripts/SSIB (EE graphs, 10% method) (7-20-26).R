@@ -313,11 +313,11 @@ plot_raw_TEE_daily
 #Export plot to folder called "APS_figures" 
 ggsave(plot_raw_TEE_daily,
        filename="Raw_TEE_daily_plot.png", 
-       width = 6.8, 
-       height = 6.8, 
+       width = 9, 
+       height = 6, 
        units = "in", 
        dpi = 300,
-       path = "/Users/laurenmichels/Desktop/APS_figures")
+       path = "/Users/laurenmichels/Desktop/figures/SSIB_2026")
 
 #---
 ## Graph: Raw daily RMR ####
@@ -355,11 +355,11 @@ plot_raw_RMR_daily
 #Export plot to folder called "APS_figures" 
 ggsave(plot_raw_RMR_daily,
        filename="Raw_RMR_daily_plot.png", 
-       width = 6.8, 
-       height = 6.8, 
+       width = 9, 
+       height = 6, 
        units = "in", 
        dpi = 300,
-       path = "/Users/laurenmichels/Desktop/APS_figures")
+       path = "/Users/laurenmichels/Desktop/figures/SSIB_2026")
 
 #-------------------------------------------------#
 # Graphs: emmeans daily EE ####
@@ -422,7 +422,7 @@ ggsave(plot_emm_TEE_daily,
        height = 7, 
        units = "in", 
        dpi = 300,
-       path = "/Users/laurenmichels/Desktop/APS_figures")
+       path = "/Users/laurenmichels/Desktop/figures/SSIB_2026")
 
 #----------------------#
 ## Emmeans daily RMR ####
@@ -482,4 +482,4 @@ ggsave(plot_emm_RMR_daily,
        height = 7, 
        units = "in", 
        dpi = 300,
-       path = "/Users/laurenmichels/Desktop/APS_figures")
+       path = "/Users/laurenmichels/Desktop/figures/SSIB_2026")
