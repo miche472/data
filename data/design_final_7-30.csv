@@ -1,0 +1,10 @@
+ID,INJECT_DAY_1,INJECT_DAY_2,INJECT_DAY_3,INJECT_DAY_4,INJECT_DAY_5
+3738,Vehicle,125pmol,250pmol,500pmol,1000pmol
+3737,125pmol,250pmol,500pmol,1000pmol,Vehicle
+3733,1000pmol,Vehicle,125pmol,250pmol,500pmol
+3732,Vehicle,125pmol,250pmol,500pmol,1000pmol
+3739,250pmol,500pmol,1000pmol,Vehicle,125pmol
+3731,1000pmol,Vehicle,125pmol,250pmol,500pmol
+3741,250pmol,500pmol,1000pmol,Vehicle,125pmol
+3735,125pmol,250pmol,500pmol,1000pmol,Vehicle
+3740,500pmol,1000pmol,Vehicle,125pmol,250pmol
