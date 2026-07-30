@@ -3,6 +3,9 @@
 #Started: 7-30-26
 #Revised: 
 
+#Set working directory
+setwd("/Users/laurenmichels/Documents/GitHub/data/data")
+
 #Libraries####
 library(dplyr) #to open a RDS and use pipe
 library(tidyr) #to use cumsum
@@ -72,3 +75,39 @@ zt_time <- function(DateTime){
 
 # FOr group assignment I should read in the .csv file that i created in the group assignment script
 # use the one from 7-17 for all mice except 3738. Use the one from 7-30 for 3738
+
+Group_assignment <- read_csv("../data/design_final_7-17.csv") 
+Group_assignment_3738 <- read_csv("../data/design_final_7-30.csv") %>%
+  filter(ID==3738)
+Group_assignment_OXA <- bind_rows(Group_assignment, Group_assignment_3738) %>%
+   mutate(ID=as.factor(ID))
+
+Group_assignment_OXA_long <- Group_assignment_OXA %>%
+  pivot_longer(
+    cols = starts_with("INJECT_DAY"),
+    names_to = "INJECT_DAY",
+    values_to = "DOSE") %>%
+  mutate(PERIOD = readr::parse_number(INJECT_DAY)) %>%
+  arrange(ID, INJECT_DAY)
+Group_assignment_OXA_long
+
+#Associate calendar date with each INJECT_DAY
+Group_assignment_OXA_long <- Group_assignment_OXA_long %>%
+mutate(date= case_when(
+  INJECT_DAY == "INJECT_DAY_1" ~ "2026-07-18",
+  INJECT_DAY == "INJECT_DAY_2" ~ "2026-07-21",
+  INJECT_DAY == "INJECT_DAY_3" ~ "2026-07-24",
+  INJECT_DAY == "INJECT_DAY_4" ~ "2026-07-27",
+  INJECT_DAY == "INJECT_DAY_5" ~ "2026-07-30"),
+  DRUG= case_when(DATE>="2026-07-18" & DATE <="2026-07-30" ~ "Orexin A")) %>%
+  mutate(date=as.date(date))
+
+#Join Sable data with 
+sable_dwn_Coh_19 <- sable_dwn %>%
+  filter(COHORT==19)
+
+OXA_Sable <- sable_dwn_Coh_19 %>% #Join FI and BW
+  left_join(
+    Group_assignment_OXA_long %>% 
+      select(ID, INJECT_DAY, DOSE, PERIOD, date, DRUG),
+    by = c("ID", "date"))
