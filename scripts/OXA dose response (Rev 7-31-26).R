@@ -181,10 +181,14 @@ injection_time <- read_csv("../data/META_INJECTIONS_LM.csv") %>%
   summarise(missing_injection = sum(is.na(INJECTION_DateTime)), total_rows = n())
  #All rows got an injection time, as intended
  
-#Calculate minutes after injection
- OXA_Sable_joined_2 <- OXA_Sable_joined %>%
+#Calculate time after injection (in minutes and in hours)
+ #Make a column for whether an observation is within 24hrs of an injection --> this is a complete day within my experimental paradigm
+OXA_Sable_joined_2 <- OXA_Sable_joined %>%
   mutate(minutes_post = as.numeric(difftime(DateTime,INJECTION_DateTime,units = "mins"))) %>%
-   mutate(hrs_post = minutes_post/60)
+  mutate(hrs_post = minutes_post/60) %>%
+  mutate(In_2hr = if_else((minutes_post<=120), 1, 0),
+        In_4hr = if_else((minutes_post<=240), 1, 0),
+        In_24hr = if_else((minutes_post<=1440), 1, 0))
  
  
  
