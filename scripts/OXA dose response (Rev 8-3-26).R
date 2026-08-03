@@ -191,5 +191,60 @@ OXA_Sable_joined_2 <- OXA_Sable_joined %>%
         In_24hr = if_else((minutes_post<=1440), 1, 0))
  
  
+#Possible safer and cleaner approach from 8-3/26 ####
+
+#Read in Sable data
+sable_dwn <- readRDS(file = "../data/sable_downsampled_data.rds") 
  
+ #Filter Sable data
+sable_dwn_OXA <- sable_dwn %>%
+  filter(COHORT==19) %>%
+  filter(ID %in% c(3731, 3732, 3733, 3735, 3737, 3738, 3739, 3740, 3741)) %>%
+  ungroup() %>%
+  #Need to get rid of sable data for 3731 after the invalid injection. 
+  group_by(ID, DateTime) %>%
+  arrange_by(DateTime) %>%
+  filter(!(ID= "3731" & DateTime >= "2026-07-30 17:33:42" & DateTime < "2026-08-03 11:33:42")) %>%
+  ungroup()
+  
+#Read in meta data for injection time
+read_injection_time <- read_csv("../data/META_INJECTIONS_LM.csv")
+
+#Process injection time data
+injection_time <- read_injection_time %>%
+  mutate(INJECTION_DateTime = lubridate::mdy_hm(INJECTION_TIME),
+         ID=as.factor(ID)) %>%
+  filter(VALID == "VALID") %>% #removes INVALID injection for 3731
+  arrange(ID, INJECTION_DateTime) %>%
+  group_by(ID) %>%
+  mutate(PERIOD = row_number()) %>%
+  ungroup()
+
+#Identify the exact injection date/time which corresponds to each chunk of recording (i.e. Period of recording)
+#This data frame has one row for each DateTime +ID...it does not yet account for the fact that multiple parameters (10)
+#were measured at once for each mouse
+ injection_assignment <- sable_dwn_OXA %>%
+  distinct(ID, DateTime) %>%
+  left_join(
+    injection_time,
+    by = join_by(
+      ID,
+      DateTime >= INJECTION_DateTime
+    ),
+    relationship = "many-to-many"
+  ) %>%
+  group_by(ID, DateTime) %>%
+  slice_max(
+    INJECTION_DateTime,
+    n = 1,
+    with_ties = FALSE
+  ) %>%
+  ungroup()
  
+#Join 
+OXA_Sable_joined <- sable_dwn_OXA %>%
+  left_join(
+    injection_assignment,
+    by = c("ID", "DateTime")
+  )
+
