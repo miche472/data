@@ -309,7 +309,8 @@ Baseline_loc_EE_60min <- Baseline_loc_EE %>%
   group_by(ID, DateTime) %>% 
   arrange(DateTime) %>%
   mutate(TEE_per_min = Kcal_Hr/60) %>%
-  mutate(recording_bin = floor(minutes_post_recording / 60))
+  mutate(recording_bin = floor(minutes_post_recording / 60)) %>%
+  drop_na(minutes_post_recording)
 
 ##Prepare BW data to be attached 
 BW_COHORT19_Baseline <- read_csv("~/Documents/GitHub/data/data/BW.csv") %>%
@@ -512,7 +513,7 @@ plot_EE_0_4hr_avg <- ggplot(Summary_Combined_avg_EE_hr_bins,
   geom_line(aes(group = ID),color = "gray50",linewidth = 0.7, alpha = 0.6) +
   geom_jitter(aes(color = factor(DOSE)),width = 0.12,size = 2,alpha = 0.7) +
   #label lines with ID
-  #geom_text(data = Summary_Combined_avg_EE_hr_bins %>% group_by(ID) %>% slice_max(DOSE, n = 1), aes(label = ID), hjust = -0.5, size = 3) +
+  geom_text(data = Summary_Combined_avg_EE_hr_bins %>% group_by(ID) %>% slice_max(DOSE, n = 1), aes(label = ID), hjust = -0.5, size = 3) +
   theme_bw(base_size = 14) +
   format.plot_LM3 +
   scale_fill_manual(values = custom_colors_OXA) +
@@ -1183,9 +1184,9 @@ ggplot(Summary_Combined_avg_EE_hr_bins, aes(x = BW, y = Avg_EE_0_24hr, color = D
 #Pearson correlation
 correlation_by_dose <- Summary_Combined_avg_EE_hr_bins %>%
   group_by(DOSE) %>%
-  summarise(n = sum(complete.cases(BW, Avg_EE_0_24hr)),
-    correlation_r = cor(BW, Avg_EE_0_24hr, use = "complete.obs", method = "pearson"),
-    p_value = cor.test(BW, Avg_EE_0_24hr, method = "pearson")$p.value, .groups = "drop") 
+  summarise(n = sum(complete.cases(BW, Avg_EE_0_2hr)),
+    correlation_r = cor(BW, Avg_EE_0_2hr, use = "complete.obs", method = "pearson"),
+    p_value = cor.test(BW, Avg_EE_0_2hr, method = "pearson")$p.value, .groups = "drop") 
 correlation_by_dose
 
 ## EE vs physical activity ####
