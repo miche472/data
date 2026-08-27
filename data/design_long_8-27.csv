@@ -1,0 +1,9 @@
+ID,INJECT_DAY_1,INJECT_DAY_2,INJECT_DAY_3
+3737,2000pmol,Vehicle,500pmol
+3741,2000pmol,Vehicle,500pmol
+3735,500pmol,2000pmol,Vehicle
+3739,500pmol,2000pmol,Vehicle
+3732,500pmol,2000pmol,Vehicle
+3731,Vehicle,500pmol,2000pmol
+3733,2000pmol,Vehicle,500pmol
+3738,Vehicle,500pmol,2000pmol
