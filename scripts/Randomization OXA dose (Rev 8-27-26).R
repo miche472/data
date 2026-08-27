@@ -76,8 +76,8 @@ design_final <- design %>%
     across(starts_with("INJECT"), ~ dose_key[.x]))
 design_final
 
-write_csv(x = design_final, "../data/design_final_8-27.csv")
-#write_csv(x = design_final, "../data/design_final_8-30.csv")
+#write_csv(x = design_final, "../data/design_final_8-27.csv")
+write_csv(x = design_final, "../data/design_final_8-30.csv")
 
 #-----------------------------------------------------.#
 ## 5. Change to long format #### 
@@ -94,5 +94,5 @@ design_long <- design_final %>%
   arrange(ID, INJECT_DAY)
 design_long
 
-write_csv(x = design_final, "../data/design_long_8-27.csv")
-#write_csv(x = design_final, "../data/design_long_8-30.csv")
+#write_csv(x = design_final, "../data/design_long_8-27.csv")
+write_csv(x = design_final, "../data/design_long_8-30.csv")
