@@ -98,22 +98,40 @@ Test_loc_EE <- Test_loc_1 %>%
 #Filter for data collected during the test period (8/27 and 8/28)
 #Also remove data that will be recorded in the afternoon on 8/28/2026
 Test_loc_EE_2 <- Test_loc_EE %>%
+  ungroup()%>%
+  group_by(ID) %>%
+  arrange(DateTime) %>%
   filter(date %in% c("2026-08-27", "2026-08-28")) %>%
-  filter(!(DateTime > "2026-08-28 10:30:00"))
+  #filter(!(DateTime > "2026-08-28 10:30:00")) %>%
+  filter(DateTime > "2026-08-28 10:30:00")
+  
 
 #Look at data starting at 5pm since mice had about 30min to normalize behavior after recording started
-Test_loc_EE_60min <- Test_loc_EE %>%
+Test_loc_EE_60min <- Test_loc_EE_2 %>%
   group_by(ID) %>%
   arrange(DateTime) %>%
   mutate(
     start_recording = min(DateTime),
-    minutes_post_recording = as.numeric(difftime(DateTime, start_recording, units = "mins")))
+    minutes_post_recording = as.numeric(difftime(DateTime, start_recording, units = "mins"))) %>%
   ungroup() %>%
   group_by(ID, DateTime) %>% 
   arrange(DateTime) %>%
   mutate(TEE_per_min = Kcal_Hr/60) %>%
   mutate(recording_bin = floor(minutes_post_recording / 60)) 
-  #drop_na(minutes_post_recording)
+
+Test_sum_EE_hr_bins <- Test_loc_EE_60min %>%
+  ungroup()%>%
+  #group_by(ID, recording_bin) %>%
+  group_by(ID) %>%
+  arrange(DateTime) %>%
+  summarise(sum_EE_60min = sum(TEE_per_min)) 
+
+#Calculate total EE for the afternoon run on 8/28/26 (after gas calibration)
+post_calib_EE_sum <- Test_loc_EE_2 %>%
+  ungroup() %>%
+  group_by(ID) %>%
+  arrange(DateTime) %>%
+  summarise(sum_EE_60min = sum(TEE_per_min)) 
 
 #---------------------------------------------------.#
 #---------------------------------------------------.#
