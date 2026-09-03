@@ -153,16 +153,61 @@ BW_sable <-sable_dwn_19 %>%
   group_by(DateTime, ID) %>%
   rename(Body_Mass = value) %>%
   rename(parameter_Body_Mass = parameter) %>%
-  rename(fix_value_Body_Mass = fix_value) %>%
+  rename(fix_value_Body_Mass = fix_value) 
+  
+BW_sable_summary <- BW_sable %>%
+  filter(date > "2026-08-25")  %>%
   group_by(ID, date) %>%
   arrange(DateTime) %>%
   filter(Body_Mass >0) %>%
   summarise(BW_avg = mean(Body_Mass),
-            BW_median= median(Body_Mass))
+            BW_median= median(Body_Mass)) %>%
+  rename("DATE"="date")  %>%
+  mutate(ID = as.factor(ID))
 
 
+#Manual BW
+BW_manual <- BW_COHORT19 %>%
+  filter(DATE > "2026-08-25") %>%
+  mutate(ID = as.factor(ID))
+
+#combine manual and Sable BW
+BW_combined <- BW_manual %>%
+  left_join(
+    BW_sable_summary %>% 
+      select(BW_avg, BW_median, DATE, ID), 
+    by = c("ID", "DATE"))
+  
+#Combine sable and manual BW measurements
+BW_combined <-BW_sable_summary  %>%
+  left_join(
+    BW_manual%>% 
+      select(ID, BW, DATE, COMMENTS), 
+    by = c("ID", "DATE"))
+  
 ## Test FoodA ####
+FI_sable <-sable_dwn_19 %>%
+    mutate(
+      Time = as_hms(format(DateTime, "%H:%M:%S")),
+      lights = if_else(Time >= as_hms("06:30:00") & Time < as_hms("18:30:00"),"on", "off")) %>%
+  filter(grepl("FoodA_*", parameter)) %>%
+  group_by(DateTime, ID) %>%
+  rename(Food_G = value) %>%
+  rename(parameter_Food_G = parameter) %>%
+  rename(fix_value_Food_G = fix_value) %>%
+  mutate(ID = as.factor(ID))
 
+FI_sable2 <- FI_sable %>%
+  filter(DATE > "2026-08-25") %>%
+  ungroup() %>%
+  group_by(ID) %>%
+  arrange(DateTime) %>%
+  mutate(FI = lag(Food_G)-Food_G)
+
+#Manual FI
+FI_manual <- FI_LM_COHORT19 %>%
+  filter(DATE > "2026-08-25") %>%
+  mutate(ID = as.factor(ID))
 
 #---------------------------------------------------.#
 #---------------------------------------------------.#
