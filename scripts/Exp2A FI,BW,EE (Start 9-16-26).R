@@ -424,6 +424,12 @@ ggsave(Exp2A_plot_BW_pct_change,
 
 #------------------------------------------------------------#.
 #------------------------------------------------------------#.
+#Body composition ####
+
+
+
+#------------------------------------------------------------#.
+#------------------------------------------------------------#.
 #Energy expenditure ####
 
 library(dplyr) #to open a RDS and use pipe
@@ -629,65 +635,318 @@ Avg_complete_days <- Daily_EE %>%
 ##EE graphs ####
  # x - axis sable time point, y-axis = TEE, colors = Treatment group
 
-
-Exp2A_plot_EE_kcal_day <-ggplot(Avg_complete_days, aes(x=SABLE, y=Avg_TEE_kcal_day, group=DRUG, fill=DRUG, color=DRUG)) +
-  geom_point(stat = "summary", 
-             fun = "mean", aes(color=DRUG), size=4) +
-  geom_line(stat = "summary", 
-            fun = "mean", aes(color=DRUG), linewidth=1.5) +
-  geom_errorbar(stat = "summary", 
-                fun.data = mean_se, aes(width=0.08), width=0.25) +
-  scale_color_manual(values = custom_colors_GLP) +
-  theme_bw(base_size = 14) +
-  format.plot_LM2 +
-  theme(axis.text.x = element_text(size= 13, angle=0, vjust=0.5, hjust=0.7)) +
-  labs(x="Time point",
-       y= "TEE (kcal/day)",
-       title= "TEE in kcal/day (Exp 2A)",
-       color="Treatment", fill="Treatment")
-Exp2A_plot_EE_kcal_day
-
-
-
 Exp2A_plot_EE_kcal_day <- ggplot(
   Avg_complete_days,
-  aes(
-    x = SABLE,
-    y = Avg_TEE_kcal_day,
-    color = DRUG
-  )
-) +
-  geom_col(
-    stat = "summary",
-    fun = "mean",
-    position = position_dodge(width = 0.8),
-    width = 0.7,
-    linewidth = 1.5,
-    fill = "white"
-  ) +
-  geom_errorbar(
-    stat = "summary",
-    fun.data = mean_se,
-    position = position_dodge(width = 0.8),
-    width = 0.25,
-    linewidth = 1
-  ) +
+  aes(x = SABLE, y = Avg_RMR_kcal_day, color = DRUG)) +
+  geom_col(stat = "summary", fun = "mean", position = position_dodge(width = 0.8), width = 0.7,
+    linewidth = 1.5, fill = "white") +
+  geom_errorbar(stat = "summary", fun.data = mean_se, position = position_dodge(width = 0.8),
+    width = 0.25, linewidth = 1) +
   scale_color_manual(values = custom_colors_GLP) +
   theme_bw(base_size = 14) +
   format.plot_LM2 +
-  theme(
-    axis.text.x = element_text(
-      size = 13,
-      angle = 0,
-      vjust = 0.5,
-      hjust = 0.7
-    )
-  ) +
-  labs(
-    x = "Time point",
-    y = "TEE (kcal/day)",
-    title = "Total energy expenditure (exp 2A)",
-    color = "Treatment"
-  )
-
+  theme(axis.text.x = element_text(size = 13,angle = 0,vjust = 0.5,hjust = 0.7),
+        axis.title.x = element_blank()) +
+  labs(x = "Stage", 
+       y = "Total energy expenditure (kcal/day)", 
+       title = "Total energy expenditure", color = "Treatment"
+       )
 Exp2A_plot_EE_kcal_day
+
+#Export plot to Incretin_dose folder
+ggsave(Exp2A_plot_EE_kcal_day,
+       filename="Exp2A_TZP_EE_kcal_day.png", 
+       width = 8, 
+       height = 6, 
+       units = "in", 
+       dpi = 300,
+       path = "/Users/laurenmichels/Desktop/figures/Incretin_dose")
+
+#-------------------------------------------------------------------------------------#.
+#-------------------------------------------------------------------------------------#.
+#-------------------------------------------------------------------------------------#.
+#-------------------------------------------------------------------------------------#.
+#         Food restriction based BW loss        ####
+#---
+
+format.plot <- theme(
+  strip.background = element_blank(),
+  panel.spacing.x = unit(0.1, "lines"),          
+  panel.spacing.y = unit(1.5, "lines"),  
+  axis.text = element_text(family = "Helvetica", size = 13),
+  axis.title = element_text(family = "Helvetica", size = 14),
+  panel.grid.minor = element_blank(), # remove background grid lines only
+  panel.grid.major = element_blank(),
+  axis.line = element_line(color = "black")) # keep axis lines
+custom_colors_345 <- c("Control" = "#FAAC41","Weight cycled" = "#3498DB")
+custom_colors_345_2 <- c("Control" = "#E67E22","Weight cycled" = "#1d5e8a")
+
+format.plot_LM2 <- theme(
+  strip.background = element_blank(),
+  panel.spacing.x = unit(0.1, "lines"),          
+  panel.spacing.y = unit(1.5, "lines"), 
+  panel.border = element_blank(),
+  panel.grid.minor = element_blank(), # remove background grid lines only
+  panel.grid.major = element_blank(),
+  axis.line = element_line(color = "black"),
+  plot.title = element_text(size=17, hjust = 0.5, face="bold", vjust=2),
+  legend.title=element_text(size=15, face="bold"),
+  legend.text=element_text(size=13),
+  axis.title.x = element_text(face="bold", size= 15),
+  axis.text.x = element_text(size= 13, angle=25, vjust=0.5, hjust=0.7),
+  axis.title.y = element_text(face="bold", size= 15),
+  axis.text.y = element_text(size = 13))
+
+
+# echo MRI
+echomri_csv_files <- tibble(
+  filepath = list.files("../data/echoMRI", full.names = TRUE)) %>% 
+  filter(grepl("*.xlsx", filepath)) 
+echomri_csv_files
+
+echomri_open_files <- echomri_csv_files %>% 
+  mutate(r = row_number()) %>% 
+  group_by(r) %>% 
+  group_split() %>% 
+  map(., function(X){
+    readxl::read_xlsx(X$filepath) %>% 
+      select(Label, Fat, Lean, Weight, TimeDateDura) %>% 
+      rename(ID = Label) %>% 
+      separate_wider_delim(TimeDateDura, delim = ";", names = c("Date", "A", "B")) %>% 
+      select(-A, -B) %>% 
+      separate_wider_delim(Date, delim = " ", names = c("hms", "month", "day", "year")) %>% 
+      mutate(day = gsub(",", "", day),
+             Date = paste(year, month, day, sep = "-"),
+             Date = lubridate::ymd(Date),
+             ID =  as.factor(ID)) %>% 
+      select(-hms, -month, -day, -year)}) %>% 
+  bind_rows() %>% 
+  left_join(., metadata, by = "ID")
+echomri_open_files
+
+# compare adiposity index = fat / lean
+echomri_data <- echomri_open_files %>% 
+  mutate(adiposity_index = Fat / Lean) %>% 
+  group_by(ID) %>% 
+  mutate(n_measurement = as.numeric(as.factor(Date)))
+echomri_data
+
+write_csv(x = echomri_data, "../data/echomri.csv")
+
+##The code below will pull data from echoMRI.csv
+#Read in echo_mri_data
+echoMRI_data <- read_csv("../data/echomri.csv")
+
+
+
+echoMRI_data_345 <- echoMRI_data %>%
+  filter(COHORT %in% c(3,4,5)) %>%
+  mutate(ID= as.factor(ID)) %>%
+  select(ID, Fat, Lean, Weight, Date, adiposity_index, n_measurement) 
+
+echoMRI_data_BWloss_345 <- echoMRI_data_345 %>%
+  filter(!(ID %in% c(3712, 3715))) %>% # died during study
+  filter(!ID %in% c(3709, 3717, 3718, 3723, 3724, 3725)) %>% #tech issue with sable cages
+  ungroup() %>%
+  group_by(ID) %>%
+  mutate(GROUP = case_when(
+    ID %in% c(3706, 3707, 3711, 3713, 3716, 3719, 3726) ~ "Control",
+    ID %in% c(3708, 3714, 3720, 3721, 3710, 3722, 3727, 3728, 3729) ~ "Weight cycled"),
+    DRUG = case_when(
+      ID %in% c(3706, 3707, 3711, 3713, 3714, 3720, 3727, 3728) ~ "Vehicle",
+      ID %in% c(3708, 3710, 3716, 3719, 3721, 3722, 3726, 3729) ~ "RTIOXA_47"),
+    GROUP = as.factor(GROUP)) %>%
+mutate(SABLE = case_when(
+           n_measurement == 1 ~ "Baseline",
+           Date %in% as.Date(c("2025-01-27", "2025-01-29", "2025-02-07")) ~ "Peak obesity",
+           ID %in% c(3711, 3727) & Date == as.Date("2025-02-20") ~ "Peak obesity",
+           Date == as.Date("2025-03-28") ~ "BW loss",
+           Date == as.Date("2025-05-27") ~ "BW maintenance",
+           Date %in% as.Date(c("2025-07-22", "2025-07-21","2025-07-17","2025-07-16",
+                               "2025-07-14","2025-07-09","2025-07-08")) ~ "BW regain",
+           TRUE ~ NA_character_)) %>%
+mutate(
+    SABLE = factor(SABLE, 
+                           levels = c("Baseline", 
+                                      "Peak obesity", 
+                                      "BW loss", 
+                                      "BW maintenance",
+                                      "BW regain"))) 
+  
+  
+  
+## Calculations 
+#change in lean, fat, total body mass, adiposity index
+echmoMRI_345_delta <- echoMRI_data_BWloss_345 %>%
+  ungroup() %>%
+  group_by(ID) %>%
+  arrange(Date) %>%
+  mutate(BW = Fat + Lean) %>%
+  mutate(Lean_pct_BW = 100*(Lean/BW),
+         Fat_pct_BW = 100*(Fat/BW))
+
+# Plot BW, lean, and fat
+plot_echmoMRI_345_delta <- echmoMRI_345_delta %>%
+  filter(SABLE %in% c("Baseline", "Peak obesity", "BW loss", "BW regain"))
+  
+#---
+#---
+##Graph BW (g) ####
+BW_plot_G_345 <-ggplot(plot_echmoMRI_345_delta, aes(x=SABLE, y=BW, group=GROUP, fill=GROUP, color=GROUP)) +
+  geom_point(stat = "summary", 
+             fun = "mean", aes(color=GROUP), size=4, position = position_dodge(width = 0)) +
+  geom_line(stat = "summary", 
+            fun = "mean", aes(color=GROUP), linewidth=1, position = position_dodge(width = 0)) +
+  geom_errorbar(stat = "summary", 
+                fun.data = mean_se, aes(width=0.08), width=0.15, position = position_dodge(width = 0)) +
+  #geom_jitter(width = 0.08, alpha = 0.6) +
+  scale_color_manual(values = custom_colors_345) +
+  theme_bw(base_size = 14) +
+  format.plot_LM2 +
+  theme(axis.text.x = element_text(size = 13,angle = 20,vjust = 0.5,hjust = 0.7),
+        axis.title.x = element_blank(),
+        title = element_blank()) +
+  labs(y= "Body weight (g)",
+       #title= "Body weight (g)",
+       color="Treatment", fill="Treatment")
+BW_plot_G_345
+
+##Graph lean mass (g) ####
+Lean_plot_G_345 <-ggplot(plot_echmoMRI_345_delta, aes(x=SABLE, y=Lean, 
+                                                       group=GROUP, fill=GROUP, color=GROUP)) +
+  geom_point(stat = "summary", fun = "mean", aes(color=GROUP), size=4) +
+  geom_line(stat = "summary", fun = "mean", aes(color=GROUP), linewidth=1) +
+  geom_errorbar(stat = "summary", fun.data = mean_se, aes(width=0.08), width=0.1) +
+  #geom_jitter(width = 0.08, alpha = 0.6) +
+  scale_color_manual(values = custom_colors_345) +
+  theme_bw(base_size = 14) +
+  format.plot_LM2 +
+  labs(y= "Lean mass (g)",
+       title= "Lean mass (g)",
+       color="Treatment", fill="Treatment")
+Lean_plot_G_345
+
+#Graph fat mass (g)
+Fat_plot_G_345 <-ggplot(plot_echmoMRI_345_delta, aes(x=SABLE, y=Fat, 
+                                                       group=GROUP, fill=GROUP, color=GROUP)) +
+  geom_point(stat = "summary", fun = "mean", aes(color=GROUP), size=4) +
+  geom_line(stat = "summary", fun = "mean", aes(color=GROUP), linewidth=1.5) +
+  geom_errorbar(stat = "summary", fun.data = mean_se, aes(width=0.08), width=0.1) +
+  #geom_jitter(width = 0.08, alpha = 0.6) +
+  scale_color_manual(values = custom_colors_345) +
+  theme_bw(base_size = 14) +
+  format.plot_LM2 +
+  labs(y= "Fat mass (g)",
+       title= "Fat mass (g)",
+       color="Treatment", fill="Treatment")
+Fat_plot_G_345
+
+
+## Percent change in BW/Lean/Fat ####
+echmoMRI_345_pct_change <- echoMRI_data_BWloss_345 %>%
+  filter(SABLE %in% c("Peak obesity", "BW loss", "BW regain")) %>%
+  ungroup() %>%
+  group_by(ID) %>%
+  arrange(Date) %>%
+  mutate(BW = Fat + Lean) %>%
+  mutate(delta_lean = Lean - first (Lean), # negative number means lean mass was lost
+         delta_fat = Fat - first(Fat),
+         delta_BW = BW - first(BW),
+         delta_AI= adiposity_index - first(adiposity_index),
+         delta_lean_vs_delta_BW = 100*(delta_lean/delta_BW), # I think this is the percent of BW loss which is lean mass
+         BW_pct_change = 100*((BW - first(BW)) / first(BW)),
+         Lean_pct_change = 100*((Lean - first(Lean)) / first(Lean)),
+         Fat_pct_change = 100*((Fat - first(Fat)) / first(Fat)),
+         Lean_pct_BW = 100*(Lean/BW),
+         Fat_pct_BW = 100*(Fat/BW))
+
+### Graph BW % change ####
+BW_plot_pct_change_345 <-ggplot(echmoMRI_345_pct_change, aes(x=SABLE, y=BW_pct_change, group=GROUP, fill=GROUP, color=GROUP)) +
+  geom_point(stat = "summary", 
+             fun = "mean", aes(color=GROUP), size=4, position = position_dodge(width = 0)) +
+  geom_line(stat = "summary", 
+            fun = "mean", aes(color=GROUP), linewidth=1, position = position_dodge(width = 0)) +
+  geom_errorbar(stat = "summary", 
+                fun.data = mean_se, aes(width=0.08), width=0.15, position = position_dodge(width = 0)) +
+    scale_y_continuous(breaks = scales::pretty_breaks(n = 6))+
+  geom_jitter(width = 0.08, alpha = 0.6) +
+  scale_color_manual(values = custom_colors_345) +
+  theme_bw(base_size = 14) +
+  format.plot_LM +
+  geom_hline(yintercept=0)+
+  theme(axis.text.x = element_text(size = 13,angle = 20,vjust = 0.5,hjust = 0.7),
+        axis.title.x = element_blank(),
+        title = element_blank()) +
+  labs(y= "Δ Body weight (%)",
+       title= "Change in Body weight (%)",
+       color="Treatment", fill="Treatment")
+BW_plot_pct_change_345
+
+#Export plot to figures folder
+ggsave(BW_plot_pct_change_345,
+       filename="Cal_restrict_BW_pct_plot.png", 
+       width = 6, 
+       height = 4, 
+       units = "in", 
+       dpi = 300,
+       path = "/Users/laurenmichels/Desktop/figures")
+
+### Graph Lean % change ####
+plot_Lean_pct_change_345 <-ggplot(echmoMRI_345_pct_change, aes(x=SABLE, y=Lean_pct_change, group=GROUP, fill=GROUP, color=GROUP)) +
+  geom_point(stat = "summary", 
+             fun = "mean", aes(color=GROUP), size=4, position = position_dodge(width = 0)) +
+  geom_line(stat = "summary", 
+            fun = "mean", aes(color=GROUP), linewidth=1, position = position_dodge(width = 0)) +
+  geom_errorbar(stat = "summary", 
+                fun.data = mean_se, aes(width=0.08), width=0.15, position = position_dodge(width = 0)) +
+    scale_y_continuous(breaks = scales::pretty_breaks(n = 6))+
+  geom_jitter(width = 0.08, alpha = 0.6) +
+  scale_color_manual(values = custom_colors_345) +
+  theme_bw(base_size = 14) +
+  format.plot_LM +
+  geom_hline(yintercept=0)+
+  theme(axis.text.x = element_text(size = 13,angle = 20,vjust = 0.5,hjust = 0.7),
+        axis.title.x = element_blank()) +
+  labs(y= "Δ Lean (%)",
+       title= "Change in lean mass (%)",
+       color="Treatment", fill="Treatment")
+plot_Lean_pct_change_345
+
+#Export plot to figures folder
+ggsave(plot_Lean_pct_change_345,
+       filename="Cal_restrict_Lean_pct_plot.png", 
+       width = 6, 
+       height = 4, 
+       units = "in", 
+       dpi = 300,
+       path = "/Users/laurenmichels/Desktop/figures")
+
+### Graph Fat % change ####
+plot_Fat_pct_change_345 <-ggplot(echmoMRI_345_pct_change, aes(x=SABLE, y=Fat_pct_change, group=GROUP, fill=GROUP, color=GROUP)) +
+  geom_point(stat = "summary", 
+             fun = "mean", aes(color=GROUP), size=4, position = position_dodge(width = 0)) +
+  geom_line(stat = "summary", 
+            fun = "mean", aes(color=GROUP), linewidth=1, position = position_dodge(width = 0)) +
+  geom_errorbar(stat = "summary", 
+                fun.data = mean_se, aes(width=0.08), width=0.15, position = position_dodge(width = 0)) +
+    scale_y_continuous(breaks = scales::pretty_breaks(n = 6))+
+  geom_jitter(width = 0.08, alpha = 0.6) +
+  scale_color_manual(values = custom_colors_345) +
+  theme_bw(base_size = 14) +
+  format.plot_LM +
+  geom_hline(yintercept=0)+
+  theme(axis.text.x = element_text(size = 13,angle = 20,vjust = 0.5,hjust = 0.7),
+        axis.title.x = element_blank()) +
+  labs(y= "Δ Fat (%)",
+       title= "Change in fat mass (%)",
+       color="Treatment", fill="Treatment")
+plot_Fat_pct_change_345
+
+#Export plot to figures folder
+ggsave(plot_Fat_pct_change_345,
+       filename="Cal_restrict_Fat_pct_plot.png", 
+       width = 6, 
+       height = 4, 
+       units = "in", 
+       dpi = 300,
+       path = "/Users/laurenmichels/Desktop/figures")
