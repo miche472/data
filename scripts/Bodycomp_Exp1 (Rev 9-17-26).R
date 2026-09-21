@@ -4,6 +4,7 @@
 #BW loss occurred over 35 days
 
 #Lean mass data requested in 7-1-26 lab meeting by Laurie and Cathy
+#This file is the data prepared for Vijay
 
 #Libraries ####
 library(mmand)
@@ -372,6 +373,37 @@ contrasts_by_DRUG_BW_pct_change_df <- as.data.frame(contrasts_by_DRUG_BW_pct_cha
 contrasts_by_n_measurement_BW_pct_change <- contrast(emm_BW_pct_change, method = "pairwise", by = "n_measurement")
 contrasts_n_measurement_BW_pct_change_df <- as.data.frame(contrasts_by_n_measurement_BW_pct_change)
 
+# ANOVA stats
+install.packages("afex")
+library(dplyr)
+library(afex)
+library(emmeans)
+
+# Keep the 3 time points and set their order
+data_anova <- plot_echmoMRI_Exp1_delta %>%
+  filter(n_measurement %in% c("Pre BW loss", "BW loss", "BW regain")) %>%
+  mutate(
+    ID = factor(ID),
+    DRUG = factor(DRUG),
+    n_measurement = factor(
+      n_measurement,
+      levels = c("Pre BW loss", "BW loss", "BW regain")
+    )
+  )
+
+bw_anova <- aov_ez(
+  id = "ID",
+  dv = "BW_pct_change",
+  data = data_anova,
+  within = "n_measurement",
+  between = "DRUG"
+)
+
+bw_anova
+
+bw_emm <- emmeans(bw_anova, ~ SABLE * GROUP)
+
+lean_emm
 
 #---
 #---
