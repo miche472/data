@@ -398,19 +398,43 @@ ggsave(Exp2A_plot_BW_G,
        dpi = 300,
        path = "/Users/laurenmichels/Desktop/figures/Incretin_dose")
 
-##### ΔBW (g) T-test  ####
+##### T-test ΔBW (g)  ####
   #Between groups at each sable time point
-ttest_BW_g_2A <- Exp2A_BW_loss_plots  %>%
-  group_by(Treatment_day) %>%
-  t_test(BW ~ DRUG, var.equal = TRUE) %>%   # or var.equal = FALSE if not assumed
-  adjust_pvalue(method = "bonferroni") %>%   # optional multiple-comparison correction
-  add_significance("p.adj")                  # adds stars based on adjusted p-values
-ttest_BW_g_2A
+#ttest_BW_g_2A <- Exp2A_BW_loss_plots  %>%
+  #group_by(Treatment_day) %>%
+  #t_test(BW ~ DRUG, var.equal = TRUE) %>%   # or var.equal = FALSE if not assumed
+  #adjust_pvalue(method = "bonferroni") %>%   # optional multiple-comparison correction
+  #add_significance("p.adj")                  # adds stars based on adjusted p-values
+#ttest_BW_g_2A
 
-##### ΔBW (g) two-way ANOVA  ####
-anova_BW_g_2A <- aov(BW ~ DRUG * Treatment_day, data = Exp2A_BW_loss_plots) # Fit the two-way ANOVA model
+##### Two-way ANOVA ΔBW (g)   ####
+Exp2A_BW_loss_ANOVA <- Exp2A_BW_loss_plots %>% # change treatment day from numeric to factor
+  mutate(Treatment_day = as.factor(Treatment_day))
+
+anova_BW_g_2A <- aov(BW ~ DRUG * Treatment_day, data = Exp2A_BW_loss_ANOVA) # Fit the two-way ANOVA model
 summary(anova_BW_g_2A) # View the ANOVA table
-TukeyHSD(anova_BW_g_2A, conf.level=.95)
+
+TukeyHSD(anova_BW_g_2A, conf.level=.95) #post hoc option 1
+#post hoc option 2 -> emmeans
+# Estimated marginal means and Drug A vs Drug B comparison
+emmeans_BW_g_2A <- emmeans(
+  anova_BW_g_2A,
+  ~ DRUG | Treatment_day)
+
+# Pairwise comparison of the two drugs at each day
+posthoc_BW_g_2A <- contrast(
+  emmeans_BW_g_2A,
+  method = "pairwise",
+  adjust = "holm") %>%
+  as.data.frame()
+posthoc_BW_g_2A
+
+#When I asked AI how to describe this post hoc this is what it said:
+  #"Body weight was analyzed using a two-way ANOVA with drug treatment and treatment day 
+  #as fixed factors, including the drug × treatment day interaction. Estimated marginal 
+  #means were used for post hoc comparisons of the two drug groups at each treatment day, 
+  #with Holm adjustment for multiple comparisons."
+
 
 ## BW (% change) ####
 Exp2A_plot_BW_pct_change <-ggplot(Exp2A_BW_loss_plots, aes(x=Treatment_day, y=BW_pct_change, group=DRUG, fill=DRUG, color=DRUG)) +
