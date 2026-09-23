@@ -350,6 +350,7 @@ Combined_loc_EE_3 <- Combined_loc_EE_2 %>%
     Ped_meters_cumulative = Ped_meters + offset
   ) %>%
   ungroup()
+#LEFT OFF on Wed 9/23 ####
 #I think this works. Create a check though to make sure that the maximum value for 
 #cumulative ped meters occurs at the final observation during each period for each mouse
 
