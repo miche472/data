@@ -369,7 +369,8 @@ Combined_loc_EE_4 <- Combined_loc_EE_3 %>%
 Combined_loc_EE_5 <- Combined_loc_EE_4 %>%
  filter(!(PERIOD=="5" & minutes_post_recording >4320)) %>% #4320 minutes is 3 days
   filter(!(ID=="3740")) %>%
-  ungroup()
+  ungroup() %>%
+  mutate(DOSE = factor(DOSE,levels = c("Baseline", "aCSF", "125pmol", "250pmol", "500pmol", "1000pmol")))
 
 #----------------------#.
 #Sanity check: 
@@ -457,6 +458,34 @@ plot_EE_2hr_kcal_hr
 #   Locomotion    ####
 #--------------------#.
 
+Loc_2hrs <- Combined_loc_EE_5 %>%
+  filter(minutes_post_injection >60 & minutes_post_injection <121) %>%
+  ungroup() %>%
+  group_by(ID, DOSE) %>%
+  arrange(DateTime) %>%
+  summarise(total_min = n(),
+            ped_m =max(Ped_meters_cumulative),
+            ped_min = ped_m/total_min,
+            All_m =max(All_meters_cumulative),
+            All_min = All_m/total_min)
+
+#Issue (10/6/26) --> baseline time point is not starting at zero for the calculation of cumulative meters ####
+  
 
 
+ggplot(Loc_2hrs, aes(x = DOSE, y = ped_m, fill = DOSE)) +
+  stat_summary(fun = mean, geom = "bar", width = 0.6) +
+  stat_summary(fun.data = mean_se,geom = "errorbar",width = 0.2) +
+  geom_line(aes(group = ID),color = "gray50",linewidth = 0.7, alpha = 0.6) + # Lines connecting the same mouse across doses
+  geom_jitter(aes(color = DOSE), width = 0.12,size = 2,alpha = 0.7) +
+  geom_text(data = Loc_2hrs %>% group_by(ID) %>%   #label lines with ID
+              slice_max(DOSE, n = 1), aes(label = ID), hjust = -0.5, size = 3) +
+  theme_bw(base_size = 14) +
+  format.plot_LM3 +
+  scale_fill_manual(values = custom_colors_OXA) +
+  scale_color_manual(values = custom_colors2_OXA) +
+  theme(legend.position = "none") +
+  labs(x = "Dose", y = "ambulation per min", title = "Within 2 hrs post injection") 
+
+#Could compare the proportion of minutes during which the mice moved after injection compared to baseline or aCSF
 
